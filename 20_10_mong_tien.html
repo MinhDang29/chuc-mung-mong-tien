@@ -52,6 +52,25 @@
                 opacity: 0;
             }
         }
+        /* CSS tùy chỉnh để điều chỉnh tỉ lệ khung ảnh trong thẻ */
+        #image-display-area {
+            /* Giúp giữ tỷ lệ khung hình vuông (1:1) để ảnh không bị nén ngang */
+            padding-bottom: 100%; 
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        /* Đảm bảo ảnh chiếm hết không gian đã tăng */
+        #my-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4" id="app">
@@ -80,9 +99,9 @@
 
         <!-- Vùng hiển thị ảnh -->
         <div id="image-display-area" class="absolute inset-0 flex items-center justify-center hidden rounded-3xl">
-            <!-- 🚨 SỬA LỖI: DÙNG ĐƯỜNG DẪN TƯƠNG ĐỐI THUẦN TÚY -->
+            <!-- 🚨 SỬA LỖI: DÙNG ĐƯỜNG DẪN TUYỆT ĐỐI GITHUB PAGES CHÍNH XÁC -->
             <img id="my-image" 
-                 src="5b31bc8086430b1d5252.jpg" 
+                 src="/chuc-mung-mong-tien/5b31bc8086430b1d5252.jpg" 
                  alt="Hình ảnh của bạn" 
                  class="w-full h-full object-cover rounded-3xl"
                  onerror="this.onerror=null; this.src='https://placehold.co/500x500/ff99cc/333333?text=L%E1%BB%97i+%E1%BA%A2nh+%C4%90%E1%BB%8Dc'">
