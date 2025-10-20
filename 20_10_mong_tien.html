@@ -32,7 +32,6 @@
             box-shadow: 0 20px 25px -5px rgba(225, 0, 150, 0.3), 0 10px 10px -5px rgba(225, 0, 150, 0.1);
             border: 4px solid #ff70a6; /* Viền hồng lấp lánh */
             position: relative; /* Quan trọng để ảnh căn chỉnh */
-            /* 🚨 ĐÃ SỬA: Tăng chiều cao tối thiểu cực lớn để chứa ảnh dọc */
             min-height: 120vh; /* Chiều cao tối thiểu 120% viewport */
             overflow: hidden; /* Cắt ảnh nếu tràn ra ngoài border-radius */
         }
@@ -56,15 +55,27 @@
             }
         }
 
-        /* CSS tùy chỉnh cho ảnh */
-        /* 🚨 ĐÃ SỬA: Xóa 'display: flex', 'align-items', 'justify-content' khỏi đây */
-        /* Chúng đã được chuyển sang class Tailwind trong HTML để tránh xung đột với class 'hidden' */
+        /* 🚨 ĐÃ SỬA: CSS tùy chỉnh cho ảnh (Sửa lỗi dứt điểm) */
+
+        /* Quy tắc này áp dụng các style cơ bản (vị trí, nền) MỌI LÚC */
         #image-display-area {
             position: absolute;
             inset: 0;
             background-color: #fff;
             border-radius: 1.5rem;
-            animation: fadeIn 1.2s ease-in forwards;
+            /* ĐÃ XÓA 'display: flex' và 'animation' khỏi đây.
+               Chúng sẽ không chạy khi class 'hidden' đang tồn tại.
+            */
+        }
+        
+        /* Quy tắc MỚI: Chỉ áp dụng display: flex và animation KHI
+           KHÔNG CÓ (not) class .hidden 
+        */
+        #image-display-area:not(.hidden) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1.2s ease-in forwards; /* Animation chỉ chạy khi hiện ra */
         }
         
         #my-image {
@@ -114,7 +125,7 @@
             </p>
         </div>
 
-        <div id="image-display-area" class="absolute inset-0 hidden flex items-center justify-center rounded-3xl">
+        <div id="image-display-area" class="absolute inset-0 hidden rounded-3xl">
             <img id="my-image" 
                  src="/chuc-mung-mong-tien/5b31bc8086430b1d5252.jpg" 
                  alt="Hình ảnh của bạn" 
