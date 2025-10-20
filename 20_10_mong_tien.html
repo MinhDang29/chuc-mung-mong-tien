@@ -5,195 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chúc mừng 20/10 bxa Mộng Tiên</title>
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     body {
       font-family: "Inter", sans-serif;
       background-color: #ffe6f0;
     }
-    .dancing-script {
+
+    .dancing {
       font-family: "Dancing Script", cursive;
     }
 
-    .flower {
-      position: absolute;
-      font-size: 3rem;
-      opacity: 0;
-      pointer-events: none;
-      user-select: none;
-      animation: rise-and-fade 3s ease-out forwards;
-      color: #d1007a;
-      z-index: 20;
-    }
-
     .card {
-      background-color: #fff;
-      box-shadow: 0 20px 25px -5px rgba(225, 0, 150, 0.3),
-                  0 10px 10px -5px rgba(225, 0, 150, 0.1);
-      border: 4px solid #ff70a6;
-      position: relative;
-      overflow: hidden;
+      background: white;
+      border: 3px solid #ff66b2;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(255, 102, 178, 0.3);
+      text-align: center;
+      max-width: 480px;
+      margin: auto;
+      transition: all 0.5s ease;
     }
 
-    .main-message {
-      color: #d1007a;
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    }
-
-    @keyframes rise-and-fade {
-      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-      50% { opacity: 0.8; }
-      100% { transform: translateY(-250px) scale(1.5) rotate(720deg); opacity: 0; }
-    }
-
-    /* Vùng hiển thị ảnh */
-    #image-display-area {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
+    #photo-container {
+      display: none;
       justify-content: center;
-      background-color: #fff;
-      border-radius: 1.5rem;
-      animation: fadeIn 1.2s ease-in forwards;
+      align-items: center;
+      flex-direction: column;
+      animation: fadeIn 1s ease forwards;
     }
 
-    /* Ảnh: nhỏ lại một chút và giữ tỉ lệ */
     #my-image {
-      width: 90%;   /* ✅ nhỏ hơn khung 1 chút */
-      height: auto;
+      width: 90%;
+      max-width: 420px;
+      border-radius: 20px;
+      border: 4px solid #ff66b2;
+      box-shadow: 0 6px 20px rgba(255, 102, 178, 0.3);
       object-fit: contain;
-      border-radius: 1rem;
-      box-shadow: 0 0 20px rgba(255, 112, 166, 0.4);
-      opacity: 0;
-      transform: scale(0.95);
-      animation: fadeInImage 1.5s ease-in-out forwards;
+      transition: all 0.5s ease;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
-    @keyframes fadeInImage {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+
+    #message {
+      margin-top: 1.5rem;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    #surprise-note {
+      color: #888;
+      font-size: 0.85rem;
+      margin-top: 1rem;
     }
   </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-4" id="app">
-
-  <div id="card-container" 
-       class="card w-full max-w-lg sm:max-w-xl p-10 sm:p-12 rounded-3xl text-center cursor-pointer transform hover:scale-[1.02] transition-transform duration-300">
-
-    <div id="greeting-content" class="space-y-6">
-      <h1 class="text-4xl sm:text-6xl dancing-script main-message font-bold">
-        Chúc Mừng Ngày 20/10
-      </h1>
-      <div id="flower-area" class="relative">
-        <p class="text-2xl sm:text-3xl font-semibold mb-4 text-pink-600">
-          Gửi em yêu Mộng Tiên,
-        </p>
-        <p class="text-xl text-gray-700">
-          Chúc Mộng Tiên ngày Phụ Nữ Việt Nam tràn ngập niềm vui, hạnh phúc và luôn xinh đẹp, rạng ngời như những đóa hoa.
-        </p>
-        <p class="mt-8 text-2xl font-bold main-message dancing-script">
-          Mọi điều tốt đẹp nhất sẽ đến với em!
-        </p>
-      </div>
-      <p id="instruction-text" class="text-base text-gray-500 mt-6">
-        (Nhấn hoặc chạm vào đây 3 lần để nhận bất ngờ!)
-      </p>
-    </div>
-
-    <!-- Vùng hiển thị ảnh -->
-    <div id="image-display-area" class="absolute inset-0 hidden rounded-3xl">
-      <img id="my-image" 
-           src="/chuc-mung-mong-tien/5b31bc8086430b1d5252.jpg" 
-           alt="Hình ảnh của bạn" 
-           onerror="this.onerror=null; this.src='https://placehold.co/500x667/ff99cc/333333?text=L%E1%BB%97i+%E1%BA%A2nh';">
-    </div>
+<body class="flex items-center justify-center min-h-screen px-4">
+  <div class="card" id="card">
+    <h1 class="text-pink-600 text-4xl dancing mb-4">
+      Chúc Mừng Ngày 20/10
+    </h1>
+    <h2 class="text-pink-600 text-xl font-semibold mb-2">
+      Gửi em yêu Mộng Tiên,
+    </h2>
+    <p class="text-gray-700 leading-relaxed">
+      Chúc Mộng Tiên ngày Phụ Nữ Việt Nam tràn ngập niềm vui, hạnh phúc và
+      luôn xinh đẹp, rạng ngời như những đóa hoa.
+    </p>
+    <p class="text-pink-500 italic mt-4">
+      Mọi điều tốt đẹp nhất sẽ đến với em!
+    </p>
+    <p id="surprise-note">
+      (Nhấn hoặc chạm vào đây 3 lần để nhận bất ngờ!)
+    </p>
   </div>
 
-  <!-- Container hiệu ứng hoa -->
-  <div id="flower-container"></div>
+  <div id="photo-container" class="flex flex-col">
+    <img
+      id="my-image"
+      src="/chuc-mung-mong-tien/5b31bc8086430b1d5252.jpg"
+      alt="Ảnh của em Mộng Tiên"
+      onerror="this.src='https://placehold.co/400x600/ff99cc/333333?text=Lỗi+ảnh';"
+    />
+    <p id="message" class="dancing text-pink-600 text-lg">
+      Cảm ơn vì đã luôn xinh đẹp và rạng rỡ như thế này 💖
+    </p>
+  </div>
 
   <script>
-    const FLOWER_EMOJI = "🌸";
-    const ROSE_EMOJI = "🌹";
-    const HEART_EMOJI = "💖";
-    const EMOJIS = [ROSE_EMOJI, ROSE_EMOJI, ROSE_EMOJI, FLOWER_EMOJI, HEART_EMOJI];
+    const card = document.getElementById("card");
+    const photoContainer = document.getElementById("photo-container");
+    let clickCount = 0;
+    let clickTimer;
 
-    const cardContainer = document.getElementById('card-container');
-    const greetingContent = document.getElementById('greeting-content');
-    const imageDisplayArea = document.getElementById('image-display-area');
-    const instructionText = document.getElementById('instruction-text');
-    const flowerContainer = document.getElementById('flower-container');
-    
-    let interactionCount = 0;
-    const MAX_INTERACTIONS = 3;
+    card.addEventListener("click", () => {
+      clickCount++;
 
-    function createFlower(x, y) {
-      if (interactionCount >= MAX_INTERACTIONS) return;
-
-      const flower = document.createElement('div');
-      flower.className = 'flower';
-      flower.innerText = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
-
-      const size = Math.random() * 0.8 + 2.0;
-      const initialX = x + (Math.random() - 0.5) * 80;
-      const initialY = y + (Math.random() - 0.5) * 20;
-      const delay = Math.random() * 0.5;
-
-      flower.style.left = initialX + 'px';
-      flower.style.top = initialY + 'px';
-      flower.style.fontSize = size + 'rem';
-      flower.style.animationDelay = delay + 's';
-      
-      flowerContainer.appendChild(flower);
-      flower.addEventListener('animationend', () => flower.remove());
-    }
-
-    function handleInteraction(e) {
-      e.preventDefault();
-      if (interactionCount < MAX_INTERACTIONS) {
-        interactionCount++;
-        
-        let clientX, clientY;
-        if (e.touches) {
-          clientX = e.touches[0].clientX;
-          clientY = e.touches[0].clientY;
-        } else {
-          clientX = e.clientX;
-          clientY = e.clientY;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => {
+        if (clickCount >= 3) {
+          card.style.display = "none";
+          photoContainer.style.display = "flex";
         }
-
-        for (let i = 0; i < 6; i++) {
-          const randomOffset = (Math.random() - 0.5) * 50;
-          createFlower(clientX + randomOffset, clientY);
-        }
-
-        if (interactionCount < MAX_INTERACTIONS) {
-          instructionText.innerText = `(Nhấn hoặc chạm vào đây ${MAX_INTERACTIONS - interactionCount} lần nữa để nhận bất ngờ!)`;
-        } else {
-          instructionText.innerText = `(Bất ngờ dành cho em đây!)`;
-          showImage();
-        }
-      }
-    }
-
-    function showImage() {
-      greetingContent.classList.add('hidden');
-      imageDisplayArea.classList.remove('hidden');
-      cardContainer.removeEventListener('click', handleInteraction);
-      cardContainer.removeEventListener('touchstart', handleInteraction);
-    }
-
-    cardContainer.addEventListener('click', handleInteraction);
-    cardContainer.addEventListener('touchstart', handleInteraction);
+        clickCount = 0;
+      }, 400);
+    });
   </script>
 </body>
 </html>
